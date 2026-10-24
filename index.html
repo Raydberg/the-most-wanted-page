@@ -5,21 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Most Wanted | Documental & Banda de Rock</title>
-    
-    <!-- FAVICON DE ROCK (Una guitarra eléctrica estilizada en miniatura para la pestaña) -->
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b0000'><path d='M8 18c-2 2-5 2-6 1s-1-4 1-6l10-10c1-1 3-1 4 0l2 2c1 1 1 3 0 4L9 19z'/></svg>">
 
-    <!-- METADATOS PARA WHATSAPP Y REDES SOCIALES (Presentación profesional del enlace) -->
-    <meta property="title" content="The Most Wanted - Documental de Rock">
-    <meta property="description" content="Conoce la historia, el esfuerzo y la pasión de la banda de rock de Cartavio. Entérate de la galería, merch oficial y el contador de lanzamiento.">
+    <meta name="description" content="Conoce la historia, el esfuerzo y la pasión de la banda de rock de Cartavio. Entérate de la secuencia, merch oficial y el contador de lanzamiento.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="The Most Wanted | Documental Oficial">
     <meta property="og:description" content="Una historia de identidad, resistencia y amor por el arte. ¡Descubre el documental y la música de la banda de Cartavio!">
-    <meta property="og:image" content="https://the-most-wanted.netlify.app/assets/imagen.jpeg"> <!-- Miniatura que se verá en WhatsApp -->
-    
-    <!-- Tailwind CSS -->
+    <meta property="og:image" content="https://the-most-wanted.netlify.app/assets/imagen.jpeg">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&display=swap" rel="stylesheet">
@@ -27,7 +22,11 @@
     <style>
         :root {
             --rock-red: #8b0000;
+            --rock-red-bright: #e11d1d;
+            --bone: #e8e2d6;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: #0a0a0a;
@@ -36,183 +35,271 @@
             overflow-x: hidden;
         }
 
-        .font-bebas {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 0.05em;
-        }
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+        .font-special { font-family: 'Special Elite', cursive; }
 
-        /* Ocultar barra de scroll en el menú móvil */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Menú inicial cristalino */
+        /* ---------- HOME (sin cambios) ---------- */
         .glass-menu {
-            background: rgba(10, 10, 10, 0.75);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.9);
         }
-
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-
+        .nav-link { position: relative; transition: color 0.3s ease; white-space: nowrap; }
         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background-color: var(--rock-red);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 50%;
+            background-color: var(--rock-red); transition: all 0.3s ease; transform: translateX(-50%);
         }
+        .nav-link:hover { color: #d1d5db; }
+        .nav-link:hover::after { width: 100%; }
 
-        .nav-link:hover {
-            color: #d1d5db;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Cajas estilo Grunge */
-        .grunge-box {
-            background-color: rgba(15, 15, 15, 0.9);
-            border: 2px solid #555;
-            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-            padding: 1.5rem;
-            box-shadow: 6px 6px 0px rgba(139, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-        }
-
-        .grunge-box:hover {
-            border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
-            transform: scale(1.05) rotate(-2deg);
-            border-color: #fff;
-            box-shadow: 8px 8px 0px var(--rock-red);
-        }
-
-        /* Cajas del Contador */
-        .grunge-box-static {
-            background-color: rgba(10, 10, 10, 0.95);
-            border: 2px solid var(--rock-red);
-            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Imagen Central Galería */
-        .center-poster {
-            background: url('./assets/imagen.jpeg') center/cover no-repeat;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
-            border: 3px solid #333;
-            border-radius: 4px;
-        }
-
-        /* Video de fondo */
         .video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translateX(-50%) translateY(-50%);
-            z-index: 0;
-            object-fit: cover;
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; transform: translateX(-50%) translateY(-50%);
+            z-index: 0; object-fit: cover;
             filter: grayscale(70%) contrast(120%) brightness(0.4);
         }
 
-        /* Animaciones */
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
+        /* ---------- ANIMACIONES BASE ---------- */
+        .fade-in { animation: fadeIn 0.45s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+        .pulse-slow { animation: pulseSlow 4s infinite alternate; }
+        @keyframes pulseSlow { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 0.6; transform: scale(1.1); } }
 
-            to {
-                opacity: 1;
-            }
-        }
-
-        .pulse-slow {
-            animation: pulseSlow 4s infinite alternate;
-        }
-
-        @keyframes pulseSlow {
-            0% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0.6;
-                transform: scale(1.1);
-            }
-        }
-
-        /* Chispas (Embers) */
         .ember {
-            position: absolute;
-            bottom: -10px;
-            background-color: #ff5e00;
-            border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 0 10px #ff0000, 0 0 20px #ff5e00;
+            position: absolute; bottom: -10px; background-color: #ff5e00; border-radius: 50%;
+            pointer-events: none; box-shadow: 0 0 10px #ff0000, 0 0 20px #ff5e00;
             animation: floatUp linear forwards;
         }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100vh) scale(0); opacity: 0; } }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
+        /* ---------- FONDO ROCK COMPARTIDO (vistas internas) ---------- */
+        .rock-bg {
+            background-color: #070707;
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(139, 0, 0, 0.45), transparent 60%),
+                radial-gradient(ellipse at 50% 120%, rgba(139, 0, 0, 0.3), transparent 55%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            position: relative;
+        }
+        .rock-bg::after { /* viñeta */
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+        }
+        .rock-bg > * { position: relative; z-index: 2; }
+        .rock-bg > .bg-layer { position: absolute; z-index: 0; }
 
-            100% {
-                transform: translateY(-100vh) scale(0);
-                opacity: 0;
-            }
+        .deco-icon { position: absolute; pointer-events: none; color: rgba(255, 255, 255, 0.05); }
+        .deco-icon.red { color: rgba(139, 0, 0, 0.18); }
+        .float-slow { animation: floatSlow 9s ease-in-out infinite alternate; }
+        @keyframes floatSlow { from { transform: translateY(0) rotate(var(--r, 0deg)); } to { transform: translateY(-18px) rotate(calc(var(--r, 0deg) + 4deg)); } }
+
+        /* Botón volver */
+        .back-btn {
+            position: absolute; top: 1rem; left: 1rem; z-index: 30;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; font-size: 1.25rem;
+            color: #9ca3af; padding: 0.35rem 0.8rem;
+            background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px; backdrop-filter: blur(6px); transition: all 0.25s ease;
+        }
+        .back-btn:hover { color: #fff; border-color: var(--rock-red); background: rgba(139, 0, 0, 0.35); }
+        @media (min-width: 768px) { .back-btn { top: 1.5rem; left: 1.5rem; font-size: 1.5rem; } }
+
+        /* Títulos con efecto póster rasgado */
+        .title-stamp {
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.12em; color: #fff;
+            text-shadow: 3px 3px 0 var(--rock-red), 0 0 24px rgba(225, 29, 29, 0.35);
         }
 
-        .connection-lines {
-            display: none;
+        /* Cinta adhesiva */
+        .tape::before, .tape::after {
+            content: ''; position: absolute; width: 70px; height: 22px; top: -11px; z-index: 5;
+            background: rgba(232, 226, 214, 0.28); border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(1px);
         }
+        .tape::before { left: 14px; transform: rotate(-18deg); }
+        .tape::after { right: 14px; transform: rotate(14deg); }
 
-        @media (min-width: 768px) {
-            .connection-lines {
-                display: block;
-            }
+        /* ---------- SECUENCIA ---------- */
+        .grunge-box {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%),
+                rgba(15, 15, 15, 0.95);
+            border: 2px solid #555;
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            box-shadow: 4px 4px 0px rgba(139, 0, 0, 0.6);
+            transition: all 0.3s ease; cursor: pointer; backdrop-filter: blur(4px);
         }
+        .grunge-box:hover {
+            border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+            transform: scale(1.04) rotate(-1.5deg); border-color: #fff;
+            box-shadow: 7px 7px 0px var(--rock-red), 0 0 30px rgba(225, 29, 29, 0.35);
+        }
+        .grunge-box:hover .node-icon { color: var(--rock-red-bright); transform: scale(1.15); }
+        .node-icon { transition: all 0.3s ease; }
 
-        .torn-edge {
+        .connector-lines line {
+            stroke: rgba(139, 0, 0, 0.75); stroke-width: 1.6; stroke-dasharray: 7 7;
+            vector-effect: non-scaling-stroke; animation: dashMove 1.4s linear infinite;
+        }
+        @keyframes dashMove { to { stroke-dashoffset: -28; } }
+
+        .poster-frame {
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255, 60, 60, 0.18), transparent 55%),
+                linear-gradient(160deg, #4a0707, #1a0303 70%);
+            border: 3px solid #333; border-radius: 4px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 60px rgba(139, 0, 0, 0.35);
             clip-path: polygon(0% 0%, 100% 1%, 99% 100%, 1% 99%);
         }
+        .center-poster {
+            background: url('./assets/imagen.jpeg') center/cover no-repeat;
+            border: 3px solid #333; box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+        }
+        .spotlight {
+            position: absolute; top: -10%; width: 38vw; height: 120%; pointer-events: none; opacity: 0.5;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 75%);
+            clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%); filter: blur(6px);
+            animation: sway 7s ease-in-out infinite alternate;
+        }
+        @keyframes sway { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+
+        /* ---------- PRÓXIMAMENTE ---------- */
+        .eq-bar {
+            width: 8px; border-radius: 2px; background: linear-gradient(to top, var(--rock-red), #ff4d4d);
+            animation: eq 1s ease-in-out infinite alternate; transform-origin: bottom;
+        }
+        @keyframes eq { from { height: 8px; } to { height: 54px; } }
+
+        .ticket {
+            background: linear-gradient(180deg, #151515, #070707);
+            border: 1px solid rgba(139, 0, 0, 0.5);
+            box-shadow: 0 0 60px rgba(139, 0, 0, 0.3), inset 0 0 40px rgba(0, 0, 0, 0.8);
+            -webkit-mask: radial-gradient(circle 14px at 0 50%, transparent 97%, #000) left / 51% 100% no-repeat,
+                          radial-gradient(circle 14px at 100% 50%, transparent 97%, #000) right / 51% 100% no-repeat;
+            mask: radial-gradient(circle 14px at 0 50%, transparent 97%, #000) left / 51% 100% no-repeat,
+                  radial-gradient(circle 14px at 100% 50%, transparent 97%, #000) right / 51% 100% no-repeat;
+        }
+
+        /* ---------- 404 GLITCH ---------- */
+        .glitch { position: relative; color: var(--rock-red-bright); }
+        .glitch::before, .glitch::after {
+            content: attr(data-text); position: absolute; inset: 0; overflow: hidden;
+        }
+        .glitch::before { color: #fff; transform: translate(-3px, 0); clip-path: inset(0 0 55% 0); animation: glitchA 2.4s infinite steps(1); }
+        .glitch::after { color: #00e5ff; transform: translate(3px, 0); clip-path: inset(55% 0 0 0); animation: glitchB 2.4s infinite steps(1); }
+        @keyframes glitchA { 0%, 90%, 100% { transform: translate(0); } 92% { transform: translate(-6px, 2px); } 96% { transform: translate(5px, -2px); } }
+        @keyframes glitchB { 0%, 85%, 100% { transform: translate(0); } 88% { transform: translate(6px, -2px); } 94% { transform: translate(-5px, 3px); } }
+
+        /* ---------- MERCH ---------- */
+        .merch-card {
+            background: linear-gradient(170deg, #1d1d1d, #050505);
+            border: 1px solid #333; border-radius: 6px; position: relative;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+        .merch-card:nth-child(odd) { transform: rotate(-1deg); }
+        .merch-card:nth-child(even) { transform: rotate(1deg); }
+        .merch-card:hover { transform: rotate(0) translateY(-8px) scale(1.02); border-color: var(--rock-red); box-shadow: 0 18px 45px rgba(139, 0, 0, 0.45); }
+        .merch-card img { transition: transform 0.6s ease, filter 0.4s ease; filter: contrast(1.08) saturate(0.9); }
+        .merch-card:hover img { transform: scale(1.08); filter: contrast(1.15) saturate(1.1); }
+        .price-sticker {
+            position: absolute; right: -10px; bottom: -14px; z-index: 6;
+            background: var(--rock-red-bright); color: #fff; font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem; padding: 0.15rem 0.9rem; transform: rotate(-4deg);
+            box-shadow: 3px 3px 0 #000; letter-spacing: 0.04em;
+        }
+        .btn-rock {
+            width: 100%; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.15em; font-size: 1.3rem;
+            padding: 0.7rem 0; border: 2px solid #666; color: #fff; background: transparent;
+            text-transform: uppercase; transition: all 0.25s ease; position: relative; overflow: hidden;
+        }
+        .btn-rock:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn-rock.primary { background: var(--rock-red); border-color: var(--rock-red); }
+        .btn-rock.primary:hover { background: var(--rock-red-bright); border-color: #fff; color: #fff; box-shadow: 0 0 25px rgba(225, 29, 29, 0.6); }
+        .btn-rock.added { background: #14532d; border-color: #22c55e; color: #fff; }
+
+        /* ---------- ACTIVACIÓN ---------- */
+        .grunge-box-static {
+            background: linear-gradient(180deg, rgba(30, 6, 6, 0.95), rgba(5, 5, 5, 0.98));
+            border: 2px solid var(--rock-red);
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(139, 0, 0, 0.35);
+        }
+        .digit-glow { text-shadow: 0 0 18px rgba(225, 29, 29, 0.7); }
+        .bolt { position: absolute; color: rgba(225, 29, 29, 0.14); animation: boltFlash 3.5s infinite; }
+        @keyframes boltFlash { 0%, 88%, 100% { opacity: 0.2; } 90% { opacity: 1; } 93% { opacity: 0.3; } 95% { opacity: 1; } }
+
+        /* ---------- PROYECTO ---------- */
+        .filmstrip {
+            height: 26px; width: 100%;
+            background:
+                repeating-linear-gradient(90deg, transparent 0 14px, #000 14px 26px) center / 100% 12px no-repeat,
+                #1a1a1a;
+            border-top: 1px solid #333; border-bottom: 1px solid #333;
+            -webkit-mask: none;
+        }
+        .filmstrip { background-image: repeating-linear-gradient(90deg, #050505 0 12px, transparent 12px 28px); background-size: 100% 10px; background-position: center; background-repeat: no-repeat; background-color: #1e1e1e; }
+
+        .synopsis {
+            background: linear-gradient(170deg, rgba(25, 25, 25, 0.9), rgba(0, 0, 0, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.08); border-left: 4px solid var(--rock-red);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        }
+        .credit-card {
+            position: relative; padding: 1.4rem 1rem 1.2rem; text-align: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.4));
+            border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 4px;
+            transition: all 0.35s ease; overflow: hidden;
+        }
+        .credit-card::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 0;
+            background: var(--rock-red-bright); transition: width 0.4s ease;
+        }
+        .credit-card:hover { transform: translateY(-5px); border-color: rgba(139, 0, 0, 0.7); box-shadow: 0 12px 30px rgba(139, 0, 0, 0.3); }
+        .credit-card:hover::before { width: 100%; }
+        .credit-num {
+            position: absolute; top: 0.2rem; right: 0.7rem; font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem; line-height: 1; color: rgba(139, 0, 0, 0.22);
+        }
+
+        /* ---------- REDES ---------- */
+        #social-links a:hover { color: var(--rock-red-bright); }
+
+        .toast {
+            position: fixed; left: 50%; bottom: 5.5rem; transform: translateX(-50%) translateY(20px);
+            background: #000; border: 1px solid var(--rock-red); color: #fff; padding: 0.6rem 1.4rem;
+            font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.12em; font-size: 1.2rem;
+            opacity: 0; pointer-events: none; z-index: 60; transition: all 0.35s ease;
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+
+        .start-subtle { background: none; border: none; text-shadow: 0 2px 12px rgba(0,0,0,0.9); animation: startBreath 3.5s ease-in-out infinite; }
+        .start-line { display: block; width: 1px; height: 34px; background: linear-gradient(to bottom, var(--rock-red-bright), transparent); transition: height 0.5s ease; }
+        .start-subtle:hover .start-line { height: 48px; }
+        @keyframes startBreath { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+        .soon-icon { width: 4.5rem; height: 4.5rem; margin: 0 auto 0.75rem; color: var(--rock-red-bright); filter: drop-shadow(0 0 14px rgba(225,29,29,0.5)); }
     </style>
 </head>
 
 <body class="antialiased">
 
-    <!-- Canvas para el Confeti -->
     <canvas id="confetti-canvas" class="fixed inset-0 z-50 pointer-events-none hidden"></canvas>
+    <div id="toast" class="toast"></div>
 
     <!-- ==========================================
-         VISTA 1: INICIO (HOME)
+         VISTA 1: INICIO (SIN CAMBIOS)
          ========================================== -->
     <main id="view-home" class="relative w-full h-screen overflow-hidden fade-in">
 
@@ -220,220 +307,227 @@
             <source src="./assets/VIDEO%20PAGINA.mp4" type="video/mp4">
         </video>
 
-        <!-- Menú Inferior Izquierdo -->
-        <div class="absolute bottom-6 left-4 md:bottom-12 md:left-12 z-10 max-w-[90vw] overflow-x-auto hide-scrollbar">
-            <nav class="glass-menu rounded-xl p-4 w-max">
-                <ul
-                    class="flex flex-row items-center space-x-6 md:space-x-8 text-center font-bebas text-xl md:text-3xl">
+        <div class="absolute left-1/2 -translate-x-1/2 top-[70%] z-20">
+            <button id="btn-start-experience" class="start-subtle group flex flex-col items-center gap-2 text-white/80 font-bebas text-lg md:text-xl tracking-[0.5em] pl-[0.5em] hover:text-white transition duration-500">
+                <span>EMPEZAR</span>
+                <span class="start-line"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600 group-hover:text-white group-hover:translate-y-1 transition duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+        </div>
+
+        <div class="absolute bottom-4 left-2 right-2 md:bottom-8 md:left-12 z-10 flex justify-start">
+            <nav class="glass-menu rounded-xl p-3 md:p-4 max-w-full overflow-x-auto hide-scrollbar">
+                <ul class="flex flex-row items-center space-x-4 md:space-x-8 text-center font-bebas text-lg md:text-2xl">
+                    <li><button id="btn-go-gallery" class="nav-link uppercase tracking-wider text-white">Secuencia</button></li>
+                    <li class="text-white/30 text-xl">|</li>
+                    <li><button id="btn-go-home" class="nav-link uppercase tracking-wider text-white text-red-500">Inicio</button></li>
+                    <li class="text-white/30 text-xl">|</li>
                     <li>
-                        <button id="btn-go-gallery"
-                            class="nav-link uppercase tracking-wider text-white">Galería</button>
-                    </li>
-                    <li class="text-white/30 text-2xl">|</li>
-                    <li>
-                        <button id="btn-go-home"
-                            class="nav-link uppercase tracking-wider text-white text-red-500">Inicio</button>
-                    </li>
-                    <li class="text-white/30 text-2xl">|</li>
-                    <li>
-                        <!-- Ahora es un botón que lleva a la vista Proyecto -->
-                        <button id="btn-go-project"
-                            class="nav-link uppercase tracking-wider text-white flex items-center gap-2">
-                            Proyecto <span
-                                class="text-xs md:text-sm font-sans tracking-normal opacity-70">(Créditos)</span>
+                        <button id="btn-go-project" class="nav-link uppercase tracking-wider text-white flex items-center gap-1">
+                            Proyecto <span class="text-[10px] md:text-xs font-sans tracking-normal opacity-70">(Créditos)</span>
                         </button>
                     </li>
-                    <li class="text-white/30 text-2xl">|</li>
-                    <li>
-                        <button id="btn-go-merch" class="nav-link uppercase tracking-wider text-white">Merch</button>
-                    </li>
+                    <li class="text-white/30 text-xl">|</li>
+                    <li><button id="btn-go-merch" class="nav-link uppercase tracking-wider text-white">Merch</button></li>
                 </ul>
             </nav>
         </div>
     </main>
 
     <!-- ==========================================
-         VISTA 2: GALERÍA (MIND MAP 4 NODOS)
+         VISTA 2: SECUENCIA
          ========================================== -->
-    <section id="view-gallery"
-        class="hidden relative w-full min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3a0808] via-[#0d0d0d] to-black overflow-x-hidden pt-20 md:pt-0 fade-in">
+    <section id="view-gallery" class="rock-bg hidden w-full min-h-screen overflow-hidden pt-20 pb-20 px-4 md:px-6 flex flex-col justify-center items-center">
 
-        <!-- SVGS DECORATIVOS DE FONDO -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            <svg class="absolute -bottom-16 -left-10 w-[32rem] h-[32rem] text-red-900 opacity-15 transform -rotate-6"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-                <circle cx="12" cy="16" r="6" />
-                <circle cx="12" cy="16" r="4" />
-                <path d="M6 10l-2-4 3-1" />
-                <ellipse cx="6" cy="5" rx="3" ry="1" />
-                <path d="M18 10l2-4-3-1" />
-                <ellipse cx="18" cy="5" rx="3" ry="1" />
-                <rect x="7" y="9" width="4" height="3" rx="1" />
-                <rect x="13" y="9" width="4" height="3" rx="1" />
-                <rect x="3" y="13" width="5" height="3" rx="1" transform="rotate(-15 5 14)" />
+        <!-- decoración -->
+        <div class="bg-layer inset-0 overflow-hidden pointer-events-none">
+            <div class="spotlight" style="left: 6%;"></div>
+            <div class="spotlight" style="right: 6%; animation-delay: -3s;"></div>
+
+            <!-- bombo -->
+            <svg class="deco-icon red float-slow" style="left: -50px; bottom: -40px; width: 340px; --r: -8deg;" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3">
+                <circle cx="100" cy="115" r="70"/><circle cx="100" cy="115" r="52"/>
+                <ellipse cx="45" cy="40" rx="38" ry="12"/><line x1="45" y1="52" x2="60" y2="105"/>
+                <ellipse cx="150" cy="30" rx="30" ry="10"/><line x1="150" y1="40" x2="135" y2="100"/>
             </svg>
-            <svg class="absolute -top-10 -right-20 w-[35rem] h-[35rem] text-white opacity-[0.03] transform rotate-12"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-                <path d="M8 18c-2 2-5 2-6 1s-1-4 1-6l10-10c1-1 3-1 4 0l2 2c1 1 1 3 0 4L9 19z" />
-                <path d="M14 6l4 4" />
-                <circle cx="9" cy="15" r="2" />
-                <path d="M11 13l2-2" />
-                <path d="M12 14l2-2" />
+            <!-- púa -->
+            <svg class="deco-icon float-slow" style="right: -40px; top: 6%; width: 300px; --r: 18deg;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M50 8 C75 8 90 28 84 52 C78 76 62 92 50 94 C38 92 22 76 16 52 C10 28 25 8 50 8Z"/>
+                <circle cx="50" cy="50" r="12"/>
+            </svg>
+            <!-- rayo -->
+            <svg class="deco-icon red" style="left: 8%; top: 12%; width: 70px;" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+            <svg class="deco-icon red" style="right: 12%; bottom: 14%; width: 60px; transform: rotate(14deg);" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+            <!-- vinilo -->
+            <svg class="deco-icon float-slow" style="left: 28%; bottom: -80px; width: 220px; --r: 0deg;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="3" fill="currentColor"/>
             </svg>
         </div>
 
-        <button
-            class="btn-back-home absolute top-6 left-6 z-30 font-bebas text-2xl text-gray-400 hover:text-white transition flex items-center gap-2 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:-translate-x-2 transition"
-                fill="none" viewBox="0 0 24 24" stroke="var(--rock-red)">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+        <button class="back-btn btn-back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             VOLVER AL INICIO
         </button>
 
-        <div
-            class="relative w-full max-w-7xl mx-auto min-h-screen flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0 p-6 z-10">
+        <div class="text-center mb-6 md:mb-10 w-full">
+            <p class="font-special text-xs md:text-sm tracking-[0.4em] text-red-500 uppercase">The Most Wanted · Cartavio</p>
+            <h2 class="title-stamp text-5xl md:text-7xl mt-1">SECUENCIA</h2>
+        </div>
 
-            <svg class="connection-lines absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40"
-                preserveAspectRatio="none">
-                <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#8b0000" stroke-width="3" stroke-dasharray="10,10" />
-                <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#8b0000" stroke-width="3" stroke-dasharray="10,10" />
-                <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="#8b0000" stroke-width="3" stroke-dasharray="10,10" />
-                <line x1="50%" y1="50%" x2="75%" y2="75%" stroke="#8b0000" stroke-width="3" stroke-dasharray="10,10" />
+        <div class="relative w-full max-w-6xl mx-auto my-auto">
+            <!-- líneas punteadas hacia el centro (solo escritorio) -->
+            <svg class="connector-lines hidden lg:block absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <line x1="50" y1="50" x2="21" y2="20"/>
+                <line x1="50" y1="50" x2="79" y2="20"/>
+                <line x1="50" y1="50" x2="21" y2="80"/>
+                <line x1="50" y1="50" x2="79" y2="80"/>
             </svg>
 
-            <!-- Nodos -->
-            <a href="#"
-                class="md:absolute md:top-[15%] md:left-[10%] lg:left-[15%] z-20 w-64 h-36 grunge-box flex flex-col items-center justify-center text-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-2 text-gray-300" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-                <span class="font-bebas text-3xl tracking-widest text-red-600">PODCASTS</span>
-            </a>
+            <div class="relative grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-6 lg:gap-10">
 
-            <!-- Póster central -->
-            <div class="z-20 w-72 md:w-80 h-[28rem] md:h-[32rem] center-poster relative group torn-edge">
-                <div
-                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                    <button
-                        class="bg-red-800 text-white font-bebas px-6 py-3 border-2 border-white hover:bg-red-900 text-2xl tracking-widest transform -rotate-2">VER
-                        DETALLES</button>
+                <!-- Columna izquierda -->
+                <div class="flex flex-row lg:flex-col lg:justify-between gap-4 lg:gap-24 lg:items-end order-2 lg:order-1">
+                    <button id="btn-go-podcasts" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                        <span class="font-bebas text-2xl md:text-3xl tracking-widest text-red-600">PODCASTS</span>
+                    </button>
+                    <button id="btn-go-comic" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        <span class="font-bebas text-2xl md:text-3xl tracking-widest text-red-600">CÓMIC</span>
+                    </button>
+                </div>
+
+                <!-- Póster central -->
+                <div class="order-1 lg:order-2 mx-auto">
+                    <div class="poster-frame w-64 sm:w-72 md:w-80 p-4 pb-6 flex flex-col items-center">
+                        <span class="font-bebas text-2xl md:text-3xl tracking-[0.18em] text-white mb-3">PRÓXIMAMENTE</span>
+                        <div class="center-poster relative group w-full h-[20rem] md:h-[24rem]">
+                            <div class="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                                <button id="btn-poster-details" class="bg-red-800 text-white font-bebas px-6 py-3 border-2 border-white hover:bg-red-900 text-2xl tracking-widest transform -rotate-2 transition hover:rotate-0">VER DETALLES</button>
+                            </div>
+                        </div>
+                        <span class="font-special text-[10px] tracking-widest text-gray-400 mt-3 uppercase">Presentado por: focoalterno.pe</span>
+                    </div>
+                </div>
+
+                <!-- Columna derecha -->
+                <div class="flex flex-row lg:flex-col lg:justify-between gap-4 lg:gap-24 lg:items-start order-3">
+                    <a href="https://vsco.co/foco-alterno?share=MTc5MjgxMzE0Nw%3D%3D" target="_blank" rel="noopener" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <span class="font-bebas text-2xl md:text-3xl tracking-widest leading-none text-red-600">GALERÍA<br><span class="text-lg text-white">DE FOTOS</span></span>
+                    </a>
+                    <button id="btn-go-activation" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="font-bebas text-2xl md:text-3xl tracking-widest leading-none text-red-600">ACTIVACIÓN<br><span class="text-lg text-white">CONTADOR</span></span>
+                    </button>
                 </div>
             </div>
-
-            <a href="#"
-                class="md:absolute md:top-[15%] md:right-[10%] lg:right-[15%] z-20 w-64 h-36 grunge-box flex flex-col items-center justify-center text-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-2 text-gray-300" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span class="font-bebas text-3xl tracking-widest leading-none text-red-600">GALERÍA<br><span
-                        class="text-xl text-white">DE FOTOS</span></span>
-            </a>
-
-            <a href="#"
-                class="md:absolute md:bottom-[15%] md:left-[10%] lg:left-[15%] z-20 w-64 h-36 grunge-box flex flex-col items-center justify-center text-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-2 text-gray-300" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332-.477-4.5-1.253" />
-                </svg>
-                <span class="font-bebas text-3xl tracking-widest text-red-600">CÓMIC</span>
-            </a>
-
-            <button id="btn-go-activation"
-                class="md:absolute md:bottom-[15%] md:right-[10%] lg:right-[15%] z-20 w-64 h-36 grunge-box flex flex-col items-center justify-center text-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-2 text-gray-300" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="font-bebas text-3xl tracking-widest leading-none text-red-600">ACTIVACIÓN<br><span
-                        class="text-xl text-white">CONTADOR</span></span>
-            </button>
         </div>
     </section>
 
     <!-- ==========================================
-         VISTA 3: MERCH PREMIUM
+         VISTA: PRÓXIMAMENTE (PODCASTS / CÓMIC)
          ========================================== -->
-    <section id="view-merch"
-        class="hidden relative w-full min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#3a0808] via-[#0d0d0d] to-black pt-24 pb-12 px-6 fade-in overflow-hidden">
+    <section id="view-coming-soon" class="rock-bg hidden w-full min-h-screen overflow-hidden flex flex-col items-center justify-center p-6">
+        <div class="bg-layer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] md:w-[35vw] md:h-[35vw] bg-red-900/25 rounded-full blur-[120px] pointer-events-none pulse-slow"></div>
+        <svg class="deco-icon red bg-layer float-slow" style="left: 6%; top: 14%; width: 80px;" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <svg class="deco-icon red bg-layer float-slow" style="right: 8%; bottom: 12%; width: 100px;" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
 
-        <button
-            class="btn-back-home absolute top-6 left-6 z-30 font-bebas text-2xl text-gray-400 hover:text-white transition flex items-center gap-2 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:-translate-x-2 transition"
-                fill="none" viewBox="0 0 24 24" stroke="var(--rock-red)">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+        <button class="back-btn btn-back-sequence">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            VOLVER A SECUENCIA
+        </button>
+
+        <div class="ticket relative max-w-2xl w-full mx-auto text-center p-8 md:p-14 fade-in">
+            <div id="coming-soon-icon" class="soon-icon" aria-hidden="true"></div>
+            <p id="coming-soon-tag" class="font-special text-xs tracking-[0.5em] text-red-500 uppercase mb-2">Entrada · Backstage</p>
+            <h2 id="coming-soon-title" class="title-stamp text-6xl md:text-8xl mb-4">PODCASTS</h2>
+
+            <div class="flex items-end justify-center gap-1.5 h-16 mb-6" aria-hidden="true">
+                <span class="eq-bar" style="animation-delay: -0.1s"></span><span class="eq-bar" style="animation-delay: -0.5s"></span>
+                <span class="eq-bar" style="animation-delay: -0.3s"></span><span class="eq-bar" style="animation-delay: -0.8s"></span>
+                <span class="eq-bar" style="animation-delay: -0.2s"></span><span class="eq-bar" style="animation-delay: -0.6s"></span>
+                <span class="eq-bar" style="animation-delay: -0.4s"></span><span class="eq-bar" style="animation-delay: -0.9s"></span>
+                <span class="eq-bar" style="animation-delay: -0.15s"></span>
+            </div>
+
+            <div class="border-t-2 border-dashed border-red-900/70 pt-6">
+                <p id="coming-soon-text" class="font-sans text-gray-300 text-lg md:text-xl font-light mb-8"></p>
+                <button class="btn-back-sequence btn-rock primary !w-auto px-10">VOLVER</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         VISTA: ERROR 404
+         ========================================== -->
+    <section id="view-404" class="rock-bg hidden w-full min-h-screen overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+        <svg class="deco-icon red bg-layer" style="left: 50%; top: 50%; width: 520px; transform: translate(-50%, -50%) rotate(-12deg);" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M50 8 C75 8 90 28 84 52 C78 76 62 92 50 94 C38 92 22 76 16 52 C10 28 25 8 50 8Z"/>
+        </svg>
+        <div class="relative max-w-xl mx-auto">
+            <h1 class="glitch font-bebas text-9xl md:text-[12rem] tracking-widest leading-none drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]" data-text="404">404</h1>
+            <h3 class="title-stamp text-3xl md:text-5xl mb-6">ACORDE FUERA DE TONO</h3>
+            <p class="font-sans text-gray-400 text-lg font-light mb-8">
+                La página que buscas no existe o fue eliminada del setlist. Regresa al escenario principal antes de que acabe el concierto.
+            </p>
+            <button class="btn-back-home btn-rock !w-auto px-10">VOLVER AL INICIO</button>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         VISTA 3: MERCH
+         ========================================== -->
+    <section id="view-merch" class="rock-bg hidden w-full min-h-screen overflow-hidden pt-24 pb-28 px-4 md:px-6">
+        <svg class="deco-icon red bg-layer float-slow" style="right: -30px; top: 8%; width: 280px; --r: 16deg;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M50 8 C75 8 90 28 84 52 C78 76 62 92 50 94 C38 92 22 76 16 52 C10 28 25 8 50 8Z"/><circle cx="50" cy="50" r="12"/></svg>
+        <svg class="deco-icon bg-layer float-slow" style="left: -60px; bottom: 6%; width: 260px;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="14"/></svg>
+
+        <button class="back-btn btn-back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             VOLVER AL INICIO
         </button>
 
-        <div class="relative z-10 max-w-6xl mx-auto">
-            <h2
-                class="font-bebas text-6xl text-center mb-16 tracking-widest border-b-2 border-red-800/50 inline-block mx-auto text-white pb-2">
-                OFFICIAL <span class="text-red-600">MERCH</span>
-            </h2>
+        <!-- carrito -->
+        <div class="absolute top-4 right-4 md:top-6 md:right-6 z-30 flex items-center gap-2 bg-black/60 border border-white/10 rounded-md px-3 py-1.5 backdrop-blur-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span id="cart-count" class="font-bebas text-2xl text-white">0</span>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Bolso -->
-                <div
-                    class="bg-gradient-to-b from-[#1a1a1a] to-black p-5 rounded-2xl border border-gray-800 group hover:border-red-800/50 transition duration-300 shadow-xl flex flex-col">
-                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded-xl">
-                        <img src="./assets/bolso.jpeg" alt="Tote Bag"
-                            class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="font-special text-xs md:text-sm tracking-[0.4em] text-red-500 uppercase">Tour '26 · Edición limitada</p>
+            <h2 class="title-stamp text-5xl md:text-7xl mb-12 md:mb-16">OFFICIAL <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">MERCH</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+                <article class="merch-card tape p-5 flex flex-col text-left" data-name="Tote Bag">
+                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded relative">
+                        <img src="./assets/bolso.jpeg" alt="Tote Bag" class="w-full h-full object-cover">
                     </div>
+                    <span class="price-sticker">S/ 45.00</span>
                     <h3 class="font-bebas text-3xl tracking-wide text-white mb-1">Tote Bag - Tour '26</h3>
-                    <p class="font-sans text-sm text-gray-400 mb-4 flex-grow">Lleva el ruido a todos lados. Lona ultra
-                        resistente en color blanco crudo con el logo clásico de la banda estampado en negro.</p>
-                    <div class="border-t border-gray-800/80 pt-4 mt-auto">
-                        <p class="text-red-500 font-bebas text-2xl mb-4">S/ 45.00</p>
-                        <button
-                            class="w-full bg-transparent border border-gray-600 text-white font-bebas text-xl py-3 rounded hover:bg-white hover:text-black hover:border-white transition uppercase tracking-widest">Agregar
-                            al carrito</button>
-                    </div>
-                </div>
+                    <p class="font-sans text-sm text-gray-400 mb-6 flex-grow">Lleva el ruido a todos lados. Lona ultra resistente en color blanco crudo con el logo clásico.</p>
+                    <button class="btn-rock add-cart mt-auto">Agregar</button>
+                </article>
 
-                <!-- Buzo -->
-                <div
-                    class="bg-gradient-to-b from-[#222] to-black p-5 rounded-2xl border border-gray-700 group hover:border-red-600 transition duration-300 shadow-2xl md:-translate-y-4 flex flex-col relative">
-                    <span
-                        class="absolute top-2 right-2 bg-red-600 text-white font-bebas px-4 py-1 rounded text-lg z-10 shadow-lg">NUEVO</span>
-                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded-xl">
-                        <img src="./assets/busola.jpeg" alt="Hoodie"
-                            class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
+                <article class="merch-card tape p-5 flex flex-col relative text-left" data-name="Hoodie Most Wanted" style="border-color: #555;">
+                    <span class="absolute -top-3 -right-3 bg-red-600 text-white font-bebas px-4 py-1 text-lg z-10 shadow-lg rotate-6">NUEVO</span>
+                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded relative">
+                        <img src="./assets/busola.jpeg" alt="Hoodie" class="w-full h-full object-cover">
                     </div>
+                    <span class="price-sticker">S/ 150.00</span>
                     <h3 class="font-bebas text-3xl tracking-wide text-white mb-1">Hoodie "Most Wanted"</h3>
-                    <p class="font-sans text-sm text-gray-400 mb-4 flex-grow">Perfecta para el invierno limeño o las
-                        noches largas de concierto. Algodón premium gris jaspeado con interior polar.</p>
-                    <div class="border-t border-gray-700 pt-4 mt-auto">
-                        <p class="text-red-500 font-bebas text-2xl mb-4">S/ 150.00</p>
-                        <button
-                            class="w-full bg-red-800 border border-red-800 text-white font-bebas text-xl py-3 rounded hover:bg-red-700 transition uppercase tracking-widest shadow-lg">Comprar
-                            Ahora</button>
-                    </div>
-                </div>
+                    <p class="font-sans text-sm text-gray-400 mb-6 flex-grow">Perfecta para el invierno o conciertos. Algodón premium gris jaspeado con interior polar.</p>
+                    <button class="btn-rock primary add-cart mt-auto">Comprar</button>
+                </article>
 
-                <!-- Gorro -->
-                <div
-                    class="bg-gradient-to-b from-[#1a1a1a] to-black p-5 rounded-2xl border border-gray-800 group hover:border-red-800/50 transition duration-300 shadow-xl flex flex-col">
-                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded-xl">
-                        <img src="./assets/gorro.jpeg" alt="Beanie"
-                            class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
+                <article class="merch-card tape p-5 flex flex-col text-left" data-name="Beanie Clásico">
+                    <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded relative">
+                        <img src="./assets/gorro.jpeg" alt="Beanie" class="w-full h-full object-cover">
                     </div>
+                    <span class="price-sticker">S/ 35.00</span>
                     <h3 class="font-bebas text-3xl tracking-wide text-white mb-1">Beanie Clásico</h3>
-                    <p class="font-sans text-sm text-gray-400 mb-4 flex-grow">Estilo under para el día a día. Gorro de
-                        lana tejida, elástico y cómodo. Bordado frontal de alta calidad.</p>
-                    <div class="border-t border-gray-800/80 pt-4 mt-auto">
-                        <p class="text-red-500 font-bebas text-2xl mb-4">S/ 35.00</p>
-                        <button
-                            class="w-full bg-transparent border border-gray-600 text-white font-bebas text-xl py-3 rounded hover:bg-white hover:text-black hover:border-white transition uppercase tracking-widest">Agregar
-                            al carrito</button>
-                    </div>
-                </div>
+                    <p class="font-sans text-sm text-gray-400 mb-6 flex-grow">Estilo under para el día a día. Gorro de lana tejida, elástico y cómodo.</p>
+                    <button class="btn-rock add-cart mt-auto">Agregar</button>
+                </article>
             </div>
         </div>
     </section>
@@ -441,384 +535,315 @@
     <!-- ==========================================
          VISTA 4: ACTIVACIÓN (CONTADOR)
          ========================================== -->
-    <section id="view-activation"
-        class="hidden relative w-full h-screen bg-[#050505] overflow-hidden flex flex-col items-center justify-center fade-in">
-
-        <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-            <div
-                class="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-red-900 rounded-full blur-[100px] md:blur-[150px] pulse-slow">
-            </div>
+    <section id="view-activation" class="rock-bg hidden w-full min-h-screen overflow-hidden flex flex-col items-center justify-center p-4">
+        <div class="bg-layer inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-red-900 rounded-full blur-[100px] md:blur-[150px] pulse-slow"></div>
         </div>
-        <div id="embers-container" class="absolute inset-0 z-0 overflow-hidden pointer-events-none"></div>
+        <svg class="bolt bg-layer" style="left: 10%; top: 15%; width: 110px;" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <svg class="bolt bg-layer" style="right: 12%; bottom: 18%; width: 150px; animation-delay: -1.7s; transform: rotate(12deg);" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <div id="embers-container" class="bg-layer inset-0 overflow-hidden pointer-events-none"></div>
 
-        <button
-            class="btn-back-home absolute top-6 left-6 z-30 font-bebas text-2xl text-gray-400 hover:text-white transition flex items-center gap-2 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:-translate-x-2 transition"
-                fill="none" viewBox="0 0 24 24" stroke="var(--rock-red)">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+        <button class="back-btn btn-back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             VOLVER AL INICIO
         </button>
 
-        <h2 id="countdown-title"
-            class="font-bebas text-4xl md:text-7xl text-white mb-10 tracking-widest relative z-10 text-center px-4">
-            NUESTRO <span class="text-red-600">NUEVO SENCILLO</span> ESTALLA EN:
+        <p class="font-special text-xs md:text-sm tracking-[0.5em] text-red-500 uppercase mb-3">Cuenta regresiva</p>
+        <h2 id="countdown-title" class="title-stamp text-3xl sm:text-4xl md:text-6xl mb-10 text-center px-2">
+            NUESTRO <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">NUEVO SENCILLO</span> ESTALLA EN:
         </h2>
 
-        <div id="countdown-boxes" class="flex gap-2 md:gap-6 relative z-10">
-            <div class="grunge-box-static w-20 md:w-32 h-24 md:h-36 flex flex-col items-center justify-center">
-                <span id="cd-days" class="font-bebas text-4xl md:text-6xl text-white">00</span>
-                <span class="font-special text-xs md:text-sm text-red-500 mt-2">DÍAS</span>
+        <div id="countdown-boxes" class="grid grid-cols-2 sm:flex gap-3 md:gap-6">
+            <div class="grunge-box-static w-28 sm:w-24 md:w-36 h-28 md:h-40 flex flex-col items-center justify-center">
+                <span id="cd-days" class="font-bebas text-5xl md:text-7xl text-white digit-glow">00</span>
+                <span class="font-special text-xs md:text-sm text-red-500 mt-2 tracking-widest">DÍAS</span>
             </div>
-            <div class="grunge-box-static w-20 md:w-32 h-24 md:h-36 flex flex-col items-center justify-center">
-                <span id="cd-hours" class="font-bebas text-4xl md:text-6xl text-white">00</span>
-                <span class="font-special text-xs md:text-sm text-red-500 mt-2">HORAS</span>
+            <div class="grunge-box-static w-28 sm:w-24 md:w-36 h-28 md:h-40 flex flex-col items-center justify-center">
+                <span id="cd-hours" class="font-bebas text-5xl md:text-7xl text-white digit-glow">00</span>
+                <span class="font-special text-xs md:text-sm text-red-500 mt-2 tracking-widest">HORAS</span>
             </div>
-            <div class="grunge-box-static w-20 md:w-32 h-24 md:h-36 flex flex-col items-center justify-center">
-                <span id="cd-mins" class="font-bebas text-4xl md:text-6xl text-white">00</span>
-                <span class="font-special text-xs md:text-sm text-red-500 mt-2">MINS</span>
+            <div class="grunge-box-static w-28 sm:w-24 md:w-36 h-28 md:h-40 flex flex-col items-center justify-center">
+                <span id="cd-mins" class="font-bebas text-5xl md:text-7xl text-white digit-glow">00</span>
+                <span class="font-special text-xs md:text-sm text-red-500 mt-2 tracking-widest">MINS</span>
             </div>
-            <div class="grunge-box-static w-20 md:w-32 h-24 md:h-36 flex flex-col items-center justify-center">
-                <span id="cd-secs" class="font-bebas text-4xl md:text-6xl text-red-500">00</span>
-                <span class="font-special text-xs md:text-sm text-white mt-2">SEGS</span>
+            <div class="grunge-box-static w-28 sm:w-24 md:w-36 h-28 md:h-40 flex flex-col items-center justify-center">
+                <span id="cd-secs" class="font-bebas text-5xl md:text-7xl text-red-500 digit-glow">00</span>
+                <span class="font-special text-xs md:text-sm text-white mt-2 tracking-widest">SEGS</span>
             </div>
         </div>
 
-        <div id="activation-message" class="hidden relative z-20 flex-col items-center justify-center">
-            <h1 class="font-bebas text-7xl md:text-9xl text-red-600 animate-pulse tracking-widest mb-6">¡ES AHORA!</h1>
-            <button
-                class="bg-transparent border-2 border-white text-white font-bebas text-3xl px-10 py-4 hover:bg-white hover:text-black transition">ESCUCHAR
-                YA</button>
+        <p id="countdown-date" class="font-special text-gray-500 text-sm mt-10 tracking-widest">12 · NOV · 2026</p>
+
+        <div id="activation-message" class="hidden z-20 flex-col items-center justify-center text-center">
+            <h1 class="font-bebas text-6xl md:text-9xl text-red-600 animate-pulse tracking-widest mb-6">¡ES AHORA!</h1>
+            <button class="btn-rock !w-auto px-10 md:px-14 md:!text-3xl">ESCUCHAR YA</button>
         </div>
     </section>
 
     <!-- ==========================================
          VISTA 5: PROYECTO (CRÉDITOS Y EQUIPO)
          ========================================== -->
-    <section id="view-project"
-        class="hidden relative w-full min-h-screen bg-[#050505] pt-24 pb-20 px-6 fade-in overflow-x-hidden flex flex-col items-center">
+    <section id="view-project" class="rock-bg hidden w-full min-h-screen overflow-x-hidden flex flex-col items-center">
+        <div class="bg-layer top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-red-900/20 blur-[140px] pointer-events-none pulse-slow"></div>
+        <div id="project-dust-container" class="bg-layer inset-0 overflow-hidden pointer-events-none"></div>
 
-        <!-- Luces de fondo cinematográficas y pulsantes -->
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-red-900/15 blur-[140px] pointer-events-none z-0 pulse-slow">
-        </div>
-
-        <!-- Contenedor de Partículas Flotantes (Polvo de Cine) -->
-        <div id="project-dust-container" class="absolute inset-0 z-0 overflow-hidden pointer-events-none"></div>
-
-        <!-- Botón Volver -->
-        <button
-            class="btn-back-home absolute top-6 left-6 z-30 font-bebas text-2xl text-gray-400 hover:text-white transition flex items-center gap-2 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:-translate-x-2 transition"
-                fill="none" viewBox="0 0 24 24" stroke="var(--rock-red)">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+        <button class="back-btn btn-back-home" style="top: 2.6rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             VOLVER AL INICIO
         </button>
 
-        <div class="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
+        <div class="filmstrip w-full"></div>
 
-            <!-- HEADER CINE -->
+        <div class="w-full max-w-5xl mx-auto flex flex-col items-center pt-28 pb-16 px-4 md:px-6">
             <div class="text-center mb-12 w-full">
-                <h2
-                    class="font-bebas text-6xl md:text-8xl text-white tracking-widest mb-0 leading-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
-                    THE MOST WANTED
-                </h2>
-                <h3
-                    class="font-bebas text-3xl md:text-5xl text-red-600 tracking-[0.4em] mt-2 border-b border-gray-800 pb-8 inline-block px-4 md:px-12">
-                    DOCUMENTAL
-                </h3>
+                <p class="font-special text-xs md:text-sm tracking-[0.5em] text-red-500 uppercase mb-3">Un documental de Foco Alterno</p>
+                <h2 class="title-stamp text-5xl sm:text-7xl md:text-9xl leading-none">THE MOST WANTED</h2>
+                <h3 class="font-bebas text-2xl sm:text-3xl md:text-5xl text-red-600 tracking-[0.35em] mt-3 inline-block border-y border-gray-800 py-2 px-6">DOCUMENTAL</h3>
             </div>
 
-            <!-- SINOPSIS ESTILO EDITORIAL -->
-            <div
-                class="bg-gradient-to-b from-[#111] to-black/90 p-8 md:p-14 rounded-2xl border border-gray-800/60 shadow-2xl mb-20 max-w-4xl relative group backdrop-blur-md">
-                <!-- Comillas decorativas de fondo -->
-                <span
-                    class="absolute top-4 left-6 text-7xl text-red-900/20 font-serif leading-none pointer-events-none">"</span>
-
-                <div
-                    class="font-sans text-gray-300 space-y-6 text-lg md:text-xl text-justify font-light relative z-10 px-2 md:px-6">
-                    <p
-                        class="first-letter:text-6xl first-letter:font-bebas first-letter:text-red-600 first-letter:mr-2 first-letter:float-left first-letter:leading-none">
-                        Este documental narra la historia de una banda de rock originaria de Cartavio que lucha por
-                        hacer escuchar su música y lograr el reconocimiento de sus canciones.
+            <div class="synopsis p-6 md:p-12 mb-20 max-w-4xl relative">
+                <span class="absolute -top-6 left-4 text-7xl md:text-9xl text-red-800/50 font-serif leading-none pointer-events-none">“</span>
+                <div class="font-sans text-gray-300 space-y-4 md:space-y-6 text-base md:text-xl text-justify font-light px-1 md:px-4">
+                    <p class="first-letter:text-6xl md:first-letter:text-7xl first-letter:font-bebas first-letter:text-red-600 first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                        Este documental narra la historia de una banda de rock originaria de Cartavio que lucha por hacer escuchar su música y lograr el reconocimiento de sus canciones.
                     </p>
-                    <p>A través de sus experiencias, se muestra el esfuerzo, la pasión y la perseverancia de sus
-                        integrantes por mantener vivo su sueño musical.</p>
-                    <p>La producción explora los desafíos que enfrentan como artistas independientes en su camino por
-                        abrirse paso en la escena musical. Asimismo, busca dar a conocer su talento, sus composiciones
-                        originales y el mensaje que transmiten a través del rock.</p>
-                    <p class="text-white font-normal italic border-l-2 border-red-600 pl-4">Más allá de la música, es
-                        una historia de identidad, resistencia y amor por el arte. El documental pretende dar voz a una
-                        banda que busca trascender sus fronteras y demostrar que el talento local merece ser reconocido.
-                    </p>
+                    <p>A través de sus experiencias, se muestra el esfuerzo, la pasión y la perseverancia de sus integrantes por mantener vivo su sueño musical.</p>
+                    <p>La producción explora los desafíos que enfrentan como artistas independientes en su camino por abrirse paso en la escena musical. Asimismo, busca dar a conocer su talento, sus composiciones originales y el mensaje que transmiten a través del rock.</p>
+                    <p class="text-white font-normal italic border-l-2 border-red-600 pl-4">Más allá de la música, es una historia de identidad, resistencia y amor por el arte. El documental pretende dar voz a una banda que busca trascender sus fronteras y demostrar que el talento local merece ser reconocido.</p>
                 </div>
-
-                <span
-                    class="absolute bottom-[-2rem] right-8 text-7xl text-red-900/20 font-serif leading-none pointer-events-none">"</span>
             </div>
 
-            <!-- CRÉDITOS DEL EQUIPO -->
-            <div class="w-full max-w-5xl">
+            <div class="w-full">
                 <div class="flex items-center justify-center gap-4 mb-12">
-                    <div class="h-px bg-gray-800 flex-1"></div>
-                    <h4 class="font-bebas text-3xl md:text-4xl text-gray-400 tracking-widest">— EL EQUIPO —</h4>
-                    <div class="h-px bg-gray-800 flex-1"></div>
+                    <div class="h-px bg-gradient-to-r from-transparent to-red-800 flex-1"></div>
+                    <h4 class="title-stamp text-3xl md:text-5xl">EL EQUIPO</h4>
+                    <div class="h-px bg-gradient-to-l from-transparent to-red-800 flex-1"></div>
                 </div>
 
-                <!-- Grid de créditos -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 text-center">
-
-                    <div class="flex flex-col group p-4 rounded-xl hover:bg-white/[0.02] transition duration-300">
-                        <span
-                            class="font-sans text-red-600 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-2 opacity-80 group-hover:opacity-100 transition">Directora
-                            / Editora</span>
-                        <span
-                            class="font-bebas text-4xl tracking-wide text-white group-hover:text-red-500 transition">Gil
-                            Pinedo, Angelina</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-5">
+                    <div class="credit-card lg:col-span-2">
+                        <span class="credit-num">01</span>
+                        <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Directora / Editora</span>
+                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Gil Pinedo, Angelina</span>
                     </div>
-
-                    <div class="flex flex-col group p-4 rounded-xl hover:bg-white/[0.02] transition duration-300">
-                        <span
-                            class="font-sans text-red-600 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-2 opacity-80 group-hover:opacity-100 transition">Gaffer
-                            / Asist. Producción</span>
-                        <span
-                            class="font-bebas text-4xl tracking-wide text-white group-hover:text-red-500 transition">Lázaro,
-                            Biélica</span>
+                    <div class="credit-card lg:col-span-2">
+                        <span class="credit-num">02</span>
+                        <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Productora / Dir. Fotografía</span>
+                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Vilchez Aguirre, Jade</span>
                     </div>
-
-                    <div class="flex flex-col group p-4 rounded-xl hover:bg-white/[0.02] transition duration-300">
-                        <span
-                            class="font-sans text-red-600 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-2 opacity-80 group-hover:opacity-100 transition">Dir.
-                            Arte / Asist. Cámara</span>
-                        <span
-                            class="font-bebas text-4xl tracking-wide text-white group-hover:text-red-500 transition">Ulloa
-                            Ortiz, Kristel</span>
+                    <div class="credit-card lg:col-span-2">
+                        <span class="credit-num">03</span>
+                        <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Dir. Arte / Asist. Cámara</span>
+                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Ulloa Ortiz, Kristel</span>
                     </div>
-
-                    <div class="flex flex-col group p-4 rounded-xl hover:bg-white/[0.02] transition duration-300">
-                        <span
-                            class="font-sans text-red-600 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-2 opacity-80 group-hover:opacity-100 transition">Productora
-                            / Dir. Fotografía</span>
-                        <span
-                            class="font-bebas text-4xl tracking-wide text-white group-hover:text-red-500 transition">Vilchez
-                            Aguirre, Jade</span>
+                    <div class="credit-card lg:col-span-3">
+                        <span class="credit-num">04</span>
+                        <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Gaffer / Asist. Producción</span>
+                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Lázaro, Biélica</span>
                     </div>
-
-                    <div
-                        class="flex flex-col group p-4 rounded-xl hover:bg-white/[0.02] transition duration-300 lg:col-span-2 lg:w-1/2 lg:mx-auto">
-                        <span
-                            class="font-sans text-red-600 text-xs md:text-sm font-bold uppercase tracking-[0.25em] mb-2 opacity-80 group-hover:opacity-100 transition">Dir.
-                            Audio / Asist. Producción</span>
-                        <span
-                            class="font-bebas text-4xl tracking-wide text-white group-hover:text-red-500 transition">Salavarria,
-                            Leandro</span>
+                    <div class="credit-card lg:col-span-3 md:col-span-2">
+                        <span class="credit-num">05</span>
+                        <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Dir. Audio / Asist. Producción</span>
+                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Salavarria, Leandro</span>
                     </div>
-
                 </div>
             </div>
-
         </div>
+
+        <div class="filmstrip w-full mt-auto"></div>
     </section>
 
     <!-- ==========================================
-         REDES SOCIALES (Esquina Inferior Derecha)
+         REDES SOCIALES
          ========================================== -->
-    <div id="social-links"
-        class="fixed bottom-6 right-6 z-50 flex gap-4 hidden opacity-0 transition-opacity duration-500">
-        <!-- Instagram -->
-        <a href="#" class="text-gray-400 hover:text-white hover:-translate-y-1 transform transition duration-300">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd"
-                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                    clip-rule="evenodd" />
-            </svg>
+    <div id="social-links" class="fixed bottom-4 right-4 md:right-6 z-50 flex items-center gap-3 hidden opacity-0 transition-opacity duration-500 bg-black/70 p-2 rounded-xl backdrop-blur-md border border-white/10">
+        <a href="https://www.instagram.com/focoalterno.pe?mdxt=eG16NWY1NmNqY2ow" target="_blank" rel="noopener" class="text-gray-400 hover:-translate-y-1 transform transition duration-300" title="Instagram">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg>
         </a>
-        <!-- TikTok -->
-        <a href="#" class="text-gray-400 hover:text-white hover:-translate-y-1 transform transition duration-300">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-            </svg>
+        <a href="https://www.tiktok.com/@focoalterno?_r=1&_t=ZS-9Anl3IfXwq0" target="_blank" rel="noopener" class="text-gray-400 hover:-translate-y-1 transform transition duration-300" title="TikTok">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
         </a>
-        <!-- YouTube -->
-        <a href="https://www.youtube.com/@lunaeefrrr"
-            class="text-gray-400 hover:text-white hover:-translate-y-1 transform transition duration-300">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd"
-                    d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                    clip-rule="evenodd" />
-            </svg>
+        <a href="https://www.youtube.com/@lunaeefrrr" target="_blank" rel="noopener" class="text-gray-400 hover:-translate-y-1 transform transition duration-300" title="YouTube">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd"/></svg>
         </a>
+        <a href="https://vsco.co/foco-alterno?share=MTc5MjgxMzE0Nw%3D%3D" target="_blank" rel="noopener" class="text-gray-400 hover:-translate-y-1 transform transition duration-300 font-bebas text-sm px-1.5 py-0.5 border border-gray-600 rounded flex items-center justify-center hover:border-white" title="VSCO">VSCO</a>
     </div>
 
     <!-- ==========================================
-         LÓGICA JAVASCRIPT PRINCIPAL
+         LÓGICA JAVASCRIPT
          ========================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- NAVEGACIÓN Y VISTAS ---
-            const viewHome = document.getElementById('view-home');
-            const viewGallery = document.getElementById('view-gallery');
-            const viewMerch = document.getElementById('view-merch');
-            const viewActivation = document.getElementById('view-activation');
-            const viewProject = document.getElementById('view-project');
-            const socialLinks = document.getElementById('social-links');
+            const $ = (id) => document.getElementById(id);
 
-            const btnGoGallery = document.getElementById('btn-go-gallery');
-            const btnGoMerch = document.getElementById('btn-go-merch');
-            const btnGoActivation = document.getElementById('btn-go-activation');
-            const btnGoProject = document.getElementById('btn-go-project');
-            const btnsBackHome = document.querySelectorAll('.btn-back-home, #btn-go-home');
+            const views = {
+                home: $('view-home'),
+                gallery: $('view-gallery'),
+                merch: $('view-merch'),
+                activation: $('view-activation'),
+                project: $('view-project'),
+                soon: $('view-coming-soon'),
+                notfound: $('view-404')
+            };
+            const socialLinks = $('social-links');
+            let socialTimer;
 
-            function hideAllViews() {
-                // Ocultar todas las secciones
-                viewHome.classList.add('hidden');
-                viewGallery.classList.add('hidden');
-                viewMerch.classList.add('hidden');
-                viewActivation.classList.add('hidden');
-                viewProject.classList.add('hidden');
+            function show(name) {
+                const target = views[name] || views.notfound;
+                Object.values(views).forEach(v => { v.classList.add('hidden'); v.classList.remove('fade-in'); });
+                target.classList.remove('hidden');
+                void target.offsetWidth;
+                target.classList.add('fade-in');
+                window.scrollTo(0, 0);
 
-                // Limpiar animaciones de entrada
-                viewHome.classList.remove('fade-in');
-                viewGallery.classList.remove('fade-in');
-                viewMerch.classList.remove('fade-in');
-                viewActivation.classList.remove('fade-in');
-                viewProject.classList.remove('fade-in');
-
-                // Mostrar iconos sociales en páginas internas
-                socialLinks.classList.remove('hidden');
-                setTimeout(() => { socialLinks.classList.remove('opacity-0'); }, 50);
+                clearTimeout(socialTimer);
+                if (target === views.home) {
+                    socialLinks.classList.add('opacity-0');
+                    socialTimer = setTimeout(() => socialLinks.classList.add('hidden'), 500);
+                } else {
+                    socialLinks.classList.remove('hidden');
+                    socialTimer = setTimeout(() => socialLinks.classList.remove('opacity-0'), 50);
+                }
             }
 
-            function hideSocialsForHome() {
-                socialLinks.classList.add('opacity-0');
-                setTimeout(() => { socialLinks.classList.add('hidden'); }, 500);
+            function go(name, e) {
+                if (e) e.preventDefault();
+                show(name);
+                history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
             }
 
-            btnGoGallery.addEventListener('click', (e) => {
-                e.preventDefault();
-                hideAllViews();
-                viewGallery.classList.remove('hidden');
-                viewGallery.classList.add('fade-in');
+            // Navegación
+            $('btn-start-experience').addEventListener('click', (e) => go('gallery', e));
+            $('btn-go-gallery').addEventListener('click', (e) => go('gallery', e));
+            $('btn-go-merch').addEventListener('click', (e) => go('merch', e));
+            $('btn-go-project').addEventListener('click', (e) => go('project', e));
+            $('btn-go-activation').addEventListener('click', (e) => go('activation', e));
+            $('btn-poster-details').addEventListener('click', (e) => go('project', e));
+
+            const SOON = {
+                podcasts: {
+                    title: 'PODCASTS', tag: 'Entrada · Backstage',
+                    text: 'Pronto podrás escuchar entrevistas exclusivas, anécdotas del rodaje y las sesiones de audio oficiales directamente en <span class="text-red-500 font-semibold">Spotify</span>. ¡Mantente conectado con el rock!',
+                    icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="17" y="5" width="14" height="24" rx="7"/><path d="M10 22a14 14 0 0 0 28 0M24 36v7M17 43h14M17 13h5M17 18h5"/></svg>'
+                },
+                comic: {
+                    title: 'CÓMIC', tag: 'Entrada · Edición especial',
+                    text: 'La historia de <span class="text-red-500 font-semibold">The Most Wanted</span> llevada a las viñetas: la banda, el barrio y el ruido de Cartavio dibujados página por página. Muy pronto, en digital y en papel.',
+                    icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h36v24H27l-8 8v-8H6z"/><path d="M26 12l-6 9h6l-4 8 10-11h-6l4-6z" fill="currentColor" stroke="none"/></svg>'
+                }
+            };
+            function openSoon(key, e) {
+                const d = SOON[key];
+                $('coming-soon-title').innerText = d.title;
+                $('coming-soon-tag').innerText = d.tag;
+                $('coming-soon-text').innerHTML = d.text;
+                $('coming-soon-icon').innerHTML = d.icon;
+                go('soon', e);
+            }
+            $('btn-go-podcasts').addEventListener('click', (e) => openSoon('podcasts', e));
+            $('btn-go-comic').addEventListener('click', (e) => openSoon('comic', e));
+
+            document.querySelectorAll('.btn-back-home, #btn-go-home').forEach(b => b.addEventListener('click', (e) => go('home', e)));
+            document.querySelectorAll('.btn-back-sequence').forEach(b => b.addEventListener('click', (e) => go('gallery', e)));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && views.home.classList.contains('hidden')) go('home');
             });
 
-            btnGoMerch.addEventListener('click', (e) => {
-                e.preventDefault();
-                hideAllViews();
-                viewMerch.classList.remove('hidden');
-                viewMerch.classList.add('fade-in');
-            });
+            // Hash inicial (ej: #merch). Si no existe → 404 elegante
+            const hash = location.hash.replace('#', '');
+            if (hash) show(hash in views ? hash : 'notfound');
 
-            btnGoProject.addEventListener('click', (e) => {
-                e.preventDefault();
-                hideAllViews();
-                viewProject.classList.remove('hidden');
-                viewProject.classList.add('fade-in');
-            });
+            // ---------- Merch: carrito ----------
+            let cart = 0;
+            const toast = $('toast');
+            let toastTimer;
+            document.querySelectorAll('.add-cart').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    cart++;
+                    $('cart-count').innerText = cart;
+                    const original = btn.dataset.label || btn.innerText;
+                    btn.dataset.label = original;
+                    btn.classList.add('added');
+                    btn.innerText = '✓ Agregado';
+                    setTimeout(() => { btn.classList.remove('added'); btn.innerText = original; }, 1400);
 
-            if (btnGoActivation) {
-                btnGoActivation.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideAllViews();
-                    viewActivation.classList.remove('hidden');
-                    viewActivation.classList.add('fade-in');
+                    toast.innerText = btn.closest('.merch-card').dataset.name + ' · agregado';
+                    toast.classList.add('show');
+                    clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
                 });
-            }
-
-            btnsBackHome.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    hideAllViews();
-                    hideSocialsForHome();
-                    viewHome.classList.remove('hidden');
-                    void viewHome.offsetWidth;
-                    viewHome.classList.add('fade-in');
-                });
             });
 
-            // --- ANIMACIÓN DE CHISPAS (EMBERS) ---
-            const embersContainer = document.getElementById('embers-container');
-            function createEmber() {
-                if (viewActivation.classList.contains('hidden')) return;
-                const ember = document.createElement('div');
-                ember.classList.add('ember');
-                const size = Math.random() * 4 + 2;
-                ember.style.width = `${size}px`;
-                ember.style.height = `${size}px`;
-                ember.style.left = `${Math.random() * 100}vw`;
-                ember.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                embersContainer.appendChild(ember);
-                setTimeout(() => { ember.remove(); }, 5000);
+            // ---------- Partículas (chispas y polvo) ----------
+            function spawn(container, opts) {
+                const p = document.createElement('div');
+                p.classList.add('ember');
+                const size = Math.random() * opts.size + opts.min;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDuration = (Math.random() * opts.dur + opts.durMin) + 's';
+                if (opts.dust) {
+                    p.style.backgroundColor = Math.random() > 0.5 ? '#ffffff' : '#ff4444';
+                    p.style.opacity = Math.random() * 0.5 + 0.1;
+                }
+                container.appendChild(p);
+                setTimeout(() => p.remove(), opts.life);
             }
-            setInterval(createEmber, 300);
+            const embers = $('embers-container');
+            const dust = $('project-dust-container');
+            setInterval(() => {
+                if (!views.activation.classList.contains('hidden')) spawn(embers, { size: 4, min: 2, dur: 3, durMin: 2, life: 5000 });
+            }, 300);
+            setInterval(() => {
+                if (!views.project.classList.contains('hidden')) spawn(dust, { size: 3, min: 1, dur: 6, durMin: 4, life: 10000, dust: true });
+            }, 400);
 
-            // --- LÓGICA DEL CONTADOR REGRESIVO ---
-            const targetDate = new Date("Nov 12, 2026 00:00:00").getTime();
+            // ---------- Contador ----------
+            const targetDate = new Date('Nov 12, 2026 00:00:00').getTime();
+            const pad = (n) => (n < 10 ? '0' + n : n);
 
-            const elDays = document.getElementById('cd-days');
-            const elHours = document.getElementById('cd-hours');
-            const elMins = document.getElementById('cd-mins');
-            const elSecs = document.getElementById('cd-secs');
-
-            const titleEl = document.getElementById('countdown-title');
-            const boxesEl = document.getElementById('countdown-boxes');
-            const messageEl = document.getElementById('activation-message');
-
-            let countdownInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
+            function tick() {
+                const distance = targetDate - Date.now();
                 if (distance < 0) {
                     clearInterval(countdownInterval);
-                    titleEl.classList.add('hidden');
-                    boxesEl.classList.add('hidden');
-                    messageEl.classList.remove('hidden');
-                    messageEl.classList.add('flex');
+                    $('countdown-title').classList.add('hidden');
+                    $('countdown-boxes').classList.add('hidden');
+                    $('countdown-date').classList.add('hidden');
+                    const msg = $('activation-message');
+                    msg.classList.remove('hidden');
+                    msg.classList.add('flex');
                     startConfetti();
                     return;
                 }
+                $('cd-days').innerText = pad(Math.floor(distance / 86400000));
+                $('cd-hours').innerText = pad(Math.floor((distance % 86400000) / 3600000));
+                $('cd-mins').innerText = pad(Math.floor((distance % 3600000) / 60000));
+                $('cd-secs').innerText = pad(Math.floor((distance % 60000) / 1000));
+            }
+            const countdownInterval = setInterval(tick, 1000);
+            tick();
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                elDays.innerText = days < 10 ? "0" + days : days;
-                elHours.innerText = hours < 10 ? "0" + hours : hours;
-                elMins.innerText = minutes < 10 ? "0" + minutes : minutes;
-                elSecs.innerText = seconds < 10 ? "0" + seconds : seconds;
-            }, 1000);
-
-            // --- LÓGICA DEL CONFETI ROCKERO ---
-            const canvas = document.getElementById('confetti-canvas');
+            // ---------- Confeti rockero ----------
+            const canvas = $('confetti-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
             let animationId;
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
+            const resizeCanvas = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
             window.addEventListener('resize', resizeCanvas);
 
             function startConfetti() {
                 canvas.classList.remove('hidden');
                 resizeCanvas();
                 const colors = ['#8b0000', '#ffffff', '#ff3333', '#555555'];
-
                 for (let i = 0; i < 150; i++) {
                     particles.push({
-                        x: canvas.width / 2,
-                        y: canvas.height / 2 + 100,
-                        r: Math.random() * 6 + 2,
-                        dx: Math.random() * 10 - 5,
-                        dy: Math.random() * -15 - 5,
+                        x: canvas.width / 2, y: canvas.height / 2 + 100,
+                        r: Math.random() * 6 + 2, dx: Math.random() * 10 - 5, dy: Math.random() * -15 - 5,
                         color: colors[Math.floor(Math.random() * colors.length)],
                         tilt: Math.floor(Math.random() * 10) - 10,
-                        tiltAngleInc: (Math.random() * 0.07) + 0.05,
-                        tiltAngle: 0
+                        tiltAngleInc: Math.random() * 0.07 + 0.05, tiltAngle: 0
                     });
                 }
                 animateConfetti();
@@ -827,52 +852,27 @@
             function animateConfetti() {
                 animationId = requestAnimationFrame(animateConfetti);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                particles.forEach((p, index) => {
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
                     p.tiltAngle += p.tiltAngleInc;
                     p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2;
                     p.x += Math.sin(p.tiltAngle) * 2;
                     p.dy += 0.05;
                     p.y += p.dy;
-
                     ctx.beginPath();
                     ctx.lineWidth = p.r;
                     ctx.strokeStyle = p.color;
                     ctx.moveTo(p.x + p.tilt + p.r, p.y);
                     ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
                     ctx.stroke();
-
-                    if (p.y > canvas.height) particles.splice(index, 1);
-                });
-
+                    if (p.y > canvas.height) particles.splice(i, 1);
+                }
                 if (particles.length === 0) {
                     cancelAnimationFrame(animationId);
                     canvas.classList.add('hidden');
                 }
             }
         });
-
-        // --- ANIMACIÓN DE POLVO CINEMATOGRÁFICO (PROJECT DUST) ---
-        const dustContainer = document.getElementById('project-dust-container');
-        function createDustParticle() {
-            const viewProject = document.getElementById('view-project');
-            if (viewProject.classList.contains('hidden')) return; // Solo corre si estamos en la vista Proyecto
-
-            const particle = document.createElement('div');
-            particle.classList.add('ember'); // Reutilizamos la misma clase de animación flotante
-
-            const size = Math.random() * 3 + 1; // Muy sutil y pequeño (1px a 4px)
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.backgroundColor = Math.random() > 0.5 ? '#ffffff' : '#ff4444'; // Blanco o rojo tenue
-            particle.style.opacity = Math.random() * 0.5 + 0.1; // Muy translúcido para que no moleste
-            particle.style.animationDuration = `${Math.random() * 6 + 4}s`; // Movimiento lento (4s a 10s)
-
-            dustContainer.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, 10000);
-        }
-        setInterval(createDustParticle, 400); // Genera una partícula suave cada 400ms
     </script>
 </body>
 
