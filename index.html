@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>The Most Wanted | Documental & Banda de Rock</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b0000'><path d='M8 18c-2 2-5 2-6 1s-1-4 1-6l10-10c1-1 3-1 4 0l2 2c1 1 1 3 0 4L9 19z'/></svg>">
@@ -290,6 +290,67 @@
         .start-subtle:hover .start-line { height: 48px; }
         @keyframes startBreath { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
         .soon-icon { width: 4.5rem; height: 4.5rem; margin: 0 auto 0.75rem; color: var(--rock-red-bright); filter: drop-shadow(0 0 14px rgba(225,29,29,0.5)); }
+
+        /* ================= RESPONSIVE ================= */
+        /* Tipografías fluidas para que ningún título desborde en 320px */
+        .fluid-hero   { font-size: clamp(2.4rem, 11vw, 8rem); line-height: 0.95; }
+        .fluid-title  { font-size: clamp(2.6rem, 9vw, 4.5rem); }
+        .fluid-h2     { font-size: clamp(1.6rem, 6.2vw, 3.75rem); line-height: 1.1; }
+        .fluid-404    { font-size: clamp(6rem, 30vw, 12rem); line-height: 1; }
+        .fluid-big    { font-size: clamp(3.2rem, 15vw, 8rem); }
+
+        /* Altura real en móviles (barra del navegador) */
+        #view-home { height: 100vh; height: 100dvh; }
+        .rock-bg { min-height: 100vh; min-height: 100dvh; }
+
+        /* Zonas seguras (notch / barra de gestos) */
+        .back-btn { top: max(1rem, env(safe-area-inset-top)); left: max(1rem, env(safe-area-inset-left)); }
+        #social-links { bottom: max(1rem, env(safe-area-inset-bottom)); right: max(1rem, env(safe-area-inset-right)); }
+
+        /* Redes más compactas en móvil */
+        @media (max-width: 639px) {
+            #social-links { gap: 0.6rem; padding: 0.35rem 0.55rem; }
+            #social-links svg { width: 1.2rem; height: 1.2rem; }
+            .back-btn { font-size: 1.05rem; padding: 0.3rem 0.65rem; }
+            .price-sticker { font-size: 1.35rem; right: -6px; }
+            .credit-num { font-size: 2.6rem; }
+            .ticket { -webkit-mask: none; mask: none; border-radius: 10px; }
+            .poster-frame { clip-path: none; }
+        }
+
+        /* Pantallas bajas (celular horizontal): menos aire vertical */
+        @media (max-height: 520px) and (orientation: landscape) {
+            .rock-bg { padding-top: 4rem !important; }
+            #view-home .start-subtle { display: none; }
+            .center-poster { height: 15rem !important; }
+        }
+
+        /* Táctil: sin hover, así que lo importante debe verse siempre */
+        @media (hover: none) {
+            .poster-hover { opacity: 1 !important; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 55%) !important; align-items: flex-end !important; padding-bottom: 1rem; backdrop-filter: none !important; }
+            .grunge-box:hover, .merch-card:hover { transform: none; }
+            .merch-card:hover img { transform: none; }
+            .credit-card:hover { transform: none; }
+            .grunge-box:active { transform: scale(0.97); border-color: #fff; box-shadow: 6px 6px 0 var(--rock-red); }
+            .start-subtle { opacity: 1; }
+        }
+
+        /* ---------- FIRMA / CRÉDITO DEL DESARROLLADOR ---------- */
+        .dev-credit {
+            position: fixed; left: 50%; transform: translateX(-50%);
+            bottom: max(3px, env(safe-area-inset-bottom)); z-index: 40;
+            display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;
+            font-family: 'Special Elite', cursive; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.35); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+            pointer-events: none; transition: color 0.4s ease;
+        }
+        .dev-credit:hover { color: rgba(255, 255, 255, 0.85); }
+        .dev-credit a { pointer-events: auto; display: inline-flex; align-items: center; color: inherit; transition: color 0.3s ease, transform 0.3s ease; }
+        .dev-credit a:hover { color: var(--rock-red-bright); transform: translateY(-1px); }
+        .dev-credit .dev-name { color: rgba(255, 255, 255, 0.7); }
+        .dev-credit .dev-sep { width: 1px; height: 7px; background: rgba(255, 255, 255, 0.25); }
+        .dev-credit svg { width: 9px; height: 9px; }
+        @media (min-width: 768px) { .dev-credit { font-size: 9px; bottom: max(8px, env(safe-area-inset-bottom)); } }
     </style>
 </head>
 
@@ -307,7 +368,7 @@
             <source src="./assets/VIDEO%20PAGINA.mp4" type="video/mp4">
         </video>
 
-        <div class="absolute left-1/2 -translate-x-1/2 top-[70%] z-20">
+        <div class="absolute left-1/2 -translate-x-1/2 top-[62%] sm:top-[68%] z-20">
             <button id="btn-start-experience" class="start-subtle group flex flex-col items-center gap-2 text-white/80 font-bebas text-lg md:text-xl tracking-[0.5em] pl-[0.5em] hover:text-white transition duration-500">
                 <span>EMPEZAR</span>
                 <span class="start-line"></span>
@@ -369,9 +430,9 @@
             VOLVER AL INICIO
         </button>
 
-        <div class="text-center mb-6 md:mb-10 w-full">
+        <div class="text-center mb-5 md:mb-10 w-full pt-2">
             <p class="font-special text-xs md:text-sm tracking-[0.4em] text-red-500 uppercase">The Most Wanted · Cartavio</p>
-            <h2 class="title-stamp text-5xl md:text-7xl mt-1">SECUENCIA</h2>
+            <h2 class="title-stamp fluid-title mt-1">SECUENCIA</h2>
         </div>
 
         <div class="relative w-full max-w-6xl mx-auto my-auto">
@@ -387,23 +448,23 @@
 
                 <!-- Columna izquierda -->
                 <div class="flex flex-row lg:flex-col lg:justify-between gap-4 lg:gap-24 lg:items-end order-2 lg:order-1">
-                    <button id="btn-go-podcasts" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                    <button id="btn-go-podcasts" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-24 sm:h-28 md:h-32 min-w-0 px-2 flex flex-col items-center justify-center text-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
-                        <span class="font-bebas text-2xl md:text-3xl tracking-widest text-red-600">PODCASTS</span>
+                        <span class="font-bebas text-xl sm:text-2xl md:text-3xl tracking-widest text-red-600">PODCASTS</span>
                     </button>
-                    <button id="btn-go-comic" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                    <button id="btn-go-comic" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-24 sm:h-28 md:h-32 min-w-0 px-2 flex flex-col items-center justify-center text-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                        <span class="font-bebas text-2xl md:text-3xl tracking-widest text-red-600">CÓMIC</span>
+                        <span class="font-bebas text-xl sm:text-2xl md:text-3xl tracking-widest text-red-600">CÓMIC</span>
                     </button>
                 </div>
 
                 <!-- Póster central -->
                 <div class="order-1 lg:order-2 mx-auto">
-                    <div class="poster-frame w-64 sm:w-72 md:w-80 p-4 pb-6 flex flex-col items-center">
+                    <div class="poster-frame w-[min(18rem,82vw)] md:w-80 p-3 md:p-4 pb-5 md:pb-6 flex flex-col items-center">
                         <span class="font-bebas text-2xl md:text-3xl tracking-[0.18em] text-white mb-3">PRÓXIMAMENTE</span>
-                        <div class="center-poster relative group w-full h-[20rem] md:h-[24rem]">
-                            <div class="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                                <button id="btn-poster-details" class="bg-red-800 text-white font-bebas px-6 py-3 border-2 border-white hover:bg-red-900 text-2xl tracking-widest transform -rotate-2 transition hover:rotate-0">VER DETALLES</button>
+                        <div class="center-poster relative group w-full h-[min(20rem,48vh)] md:h-[24rem]">
+                            <div class="poster-hover absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                                <button id="btn-poster-details" class="bg-red-800 text-white font-bebas px-5 py-2 md:px-6 md:py-3 border-2 border-white hover:bg-red-900 text-xl md:text-2xl tracking-widest transform -rotate-2 transition hover:rotate-0">VER DETALLES</button>
                             </div>
                         </div>
                         <span class="font-special text-[10px] tracking-widest text-gray-400 mt-3 uppercase">Presentado por: focoalterno.pe</span>
@@ -412,13 +473,13 @@
 
                 <!-- Columna derecha -->
                 <div class="flex flex-row lg:flex-col lg:justify-between gap-4 lg:gap-24 lg:items-start order-3">
-                    <a href="https://vsco.co/foco-alterno?share=MTc5MjgxMzE0Nw%3D%3D" target="_blank" rel="noopener" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                    <a href="https://vsco.co/foco-alterno?share=MTc5MjgxMzE0Nw%3D%3D" target="_blank" rel="noopener" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-24 sm:h-28 md:h-32 min-w-0 px-2 flex flex-col items-center justify-center text-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        <span class="font-bebas text-2xl md:text-3xl tracking-widest leading-none text-red-600">GALERÍA<br><span class="text-lg text-white">DE FOTOS</span></span>
+                        <span class="font-bebas text-xl sm:text-2xl md:text-3xl tracking-widest leading-none text-red-600">GALERÍA<br><span class="text-lg text-white">DE FOTOS</span></span>
                     </a>
-                    <button id="btn-go-activation" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-28 md:h-32 flex flex-col items-center justify-center text-center text-white">
+                    <button id="btn-go-activation" class="grunge-box flex-1 lg:flex-initial lg:w-60 h-24 sm:h-28 md:h-32 min-w-0 px-2 flex flex-col items-center justify-center text-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="node-icon h-8 w-8 mb-1 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span class="font-bebas text-2xl md:text-3xl tracking-widest leading-none text-red-600">ACTIVACIÓN<br><span class="text-lg text-white">CONTADOR</span></span>
+                        <span class="font-bebas text-xl sm:text-2xl md:text-3xl tracking-widest leading-none text-red-600">ACTIVACIÓN<br><span class="text-lg text-white">CONTADOR</span></span>
                     </button>
                 </div>
             </div>
@@ -438,10 +499,10 @@
             VOLVER A SECUENCIA
         </button>
 
-        <div class="ticket relative max-w-2xl w-full mx-auto text-center p-8 md:p-14 fade-in">
+        <div class="ticket relative max-w-2xl w-full mx-auto text-center p-6 sm:p-8 md:p-14 mt-10 fade-in">
             <div id="coming-soon-icon" class="soon-icon" aria-hidden="true"></div>
             <p id="coming-soon-tag" class="font-special text-xs tracking-[0.5em] text-red-500 uppercase mb-2">Entrada · Backstage</p>
-            <h2 id="coming-soon-title" class="title-stamp text-6xl md:text-8xl mb-4">PODCASTS</h2>
+            <h2 id="coming-soon-title" class="title-stamp fluid-big mb-4">PODCASTS</h2>
 
             <div class="flex items-end justify-center gap-1.5 h-16 mb-6" aria-hidden="true">
                 <span class="eq-bar" style="animation-delay: -0.1s"></span><span class="eq-bar" style="animation-delay: -0.5s"></span>
@@ -452,7 +513,7 @@
             </div>
 
             <div class="border-t-2 border-dashed border-red-900/70 pt-6">
-                <p id="coming-soon-text" class="font-sans text-gray-300 text-lg md:text-xl font-light mb-8"></p>
+                <p id="coming-soon-text" class="font-sans text-gray-300 text-base sm:text-lg md:text-xl font-light mb-8"></p>
                 <button class="btn-back-sequence btn-rock primary !w-auto px-10">VOLVER</button>
             </div>
         </div>
@@ -462,12 +523,12 @@
          VISTA: ERROR 404
          ========================================== -->
     <section id="view-404" class="rock-bg hidden w-full min-h-screen overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-        <svg class="deco-icon red bg-layer" style="left: 50%; top: 50%; width: 520px; transform: translate(-50%, -50%) rotate(-12deg);" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+        <svg class="deco-icon red bg-layer" style="left: 50%; top: 50%; width: min(520px, 90vw); transform: translate(-50%, -50%) rotate(-12deg);" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
             <path d="M50 8 C75 8 90 28 84 52 C78 76 62 92 50 94 C38 92 22 76 16 52 C10 28 25 8 50 8Z"/>
         </svg>
         <div class="relative max-w-xl mx-auto">
-            <h1 class="glitch font-bebas text-9xl md:text-[12rem] tracking-widest leading-none drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]" data-text="404">404</h1>
-            <h3 class="title-stamp text-3xl md:text-5xl mb-6">ACORDE FUERA DE TONO</h3>
+            <h1 class="glitch font-bebas fluid-404 tracking-widest drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]" data-text="404">404</h1>
+            <h3 class="title-stamp fluid-h2 mb-6">ACORDE FUERA DE TONO</h3>
             <p class="font-sans text-gray-400 text-lg font-light mb-8">
                 La página que buscas no existe o fue eliminada del setlist. Regresa al escenario principal antes de que acabe el concierto.
             </p>
@@ -478,7 +539,7 @@
     <!-- ==========================================
          VISTA 3: MERCH
          ========================================== -->
-    <section id="view-merch" class="rock-bg hidden w-full min-h-screen overflow-hidden pt-24 pb-28 px-4 md:px-6">
+    <section id="view-merch" class="rock-bg hidden w-full min-h-screen overflow-hidden pt-24 pb-28 px-5 md:px-6">
         <svg class="deco-icon red bg-layer float-slow" style="right: -30px; top: 8%; width: 280px; --r: 16deg;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M50 8 C75 8 90 28 84 52 C78 76 62 92 50 94 C38 92 22 76 16 52 C10 28 25 8 50 8Z"/><circle cx="50" cy="50" r="12"/></svg>
         <svg class="deco-icon bg-layer float-slow" style="left: -60px; bottom: 6%; width: 260px;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="14"/></svg>
 
@@ -488,16 +549,16 @@
         </button>
 
         <!-- carrito -->
-        <div class="absolute top-4 right-4 md:top-6 md:right-6 z-30 flex items-center gap-2 bg-black/60 border border-white/10 rounded-md px-3 py-1.5 backdrop-blur-md">
+        <div class="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 md:top-6 md:right-6 z-30 flex items-center gap-2 bg-black/60 border border-white/10 rounded-md px-3 py-1.5 backdrop-blur-md">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             <span id="cart-count" class="font-bebas text-2xl text-white">0</span>
         </div>
 
         <div class="max-w-6xl mx-auto text-center">
             <p class="font-special text-xs md:text-sm tracking-[0.4em] text-red-500 uppercase">Tour '26 · Edición limitada</p>
-            <h2 class="title-stamp text-5xl md:text-7xl mb-12 md:mb-16">OFFICIAL <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">MERCH</span></h2>
+            <h2 class="title-stamp fluid-title mb-12 md:mb-16">OFFICIAL <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">MERCH</span></h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-8 max-w-md sm:max-w-none mx-auto">
                 <article class="merch-card tape p-5 flex flex-col text-left" data-name="Tote Bag">
                     <div class="aspect-square bg-gray-900 mb-6 overflow-hidden rounded relative">
                         <img src="./assets/bolso.jpeg" alt="Tote Bag" class="w-full h-full object-cover">
@@ -549,11 +610,11 @@
         </button>
 
         <p class="font-special text-xs md:text-sm tracking-[0.5em] text-red-500 uppercase mb-3">Cuenta regresiva</p>
-        <h2 id="countdown-title" class="title-stamp text-3xl sm:text-4xl md:text-6xl mb-10 text-center px-2">
+        <h2 id="countdown-title" class="title-stamp fluid-h2 mb-8 md:mb-10 text-center px-2 pt-10">
             NUESTRO <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">NUEVO SENCILLO</span> ESTALLA EN:
         </h2>
 
-        <div id="countdown-boxes" class="grid grid-cols-2 sm:flex gap-3 md:gap-6">
+        <div id="countdown-boxes" class="grid grid-cols-2 sm:flex gap-3 md:gap-6 justify-items-center">
             <div class="grunge-box-static w-28 sm:w-24 md:w-36 h-28 md:h-40 flex flex-col items-center justify-center">
                 <span id="cd-days" class="font-bebas text-5xl md:text-7xl text-white digit-glow">00</span>
                 <span class="font-special text-xs md:text-sm text-red-500 mt-2 tracking-widest">DÍAS</span>
@@ -575,7 +636,7 @@
         <p id="countdown-date" class="font-special text-gray-500 text-sm mt-10 tracking-widest">12 · NOV · 2026</p>
 
         <div id="activation-message" class="hidden z-20 flex-col items-center justify-center text-center">
-            <h1 class="font-bebas text-6xl md:text-9xl text-red-600 animate-pulse tracking-widest mb-6">¡ES AHORA!</h1>
+            <h1 class="font-bebas fluid-big text-red-600 animate-pulse tracking-widest mb-6">¡ES AHORA!</h1>
             <button class="btn-rock !w-auto px-10 md:px-14 md:!text-3xl">ESCUCHAR YA</button>
         </div>
     </section>
@@ -587,23 +648,23 @@
         <div class="bg-layer top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-red-900/20 blur-[140px] pointer-events-none pulse-slow"></div>
         <div id="project-dust-container" class="bg-layer inset-0 overflow-hidden pointer-events-none"></div>
 
-        <button class="back-btn btn-back-home" style="top: 2.6rem;">
+        <button class="back-btn btn-back-home" style="top: calc(max(1rem, env(safe-area-inset-top)) + 1.9rem);">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="var(--rock-red-bright)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             VOLVER AL INICIO
         </button>
 
         <div class="filmstrip w-full"></div>
 
-        <div class="w-full max-w-5xl mx-auto flex flex-col items-center pt-28 pb-16 px-4 md:px-6">
-            <div class="text-center mb-12 w-full">
-                <p class="font-special text-xs md:text-sm tracking-[0.5em] text-red-500 uppercase mb-3">Un documental de Foco Alterno</p>
-                <h2 class="title-stamp text-5xl sm:text-7xl md:text-9xl leading-none">THE MOST WANTED</h2>
-                <h3 class="font-bebas text-2xl sm:text-3xl md:text-5xl text-red-600 tracking-[0.35em] mt-3 inline-block border-y border-gray-800 py-2 px-6">DOCUMENTAL</h3>
+        <div class="w-full max-w-5xl mx-auto flex flex-col items-center pt-24 md:pt-28 pb-28 px-4 md:px-6">
+            <div class="text-center mb-10 md:mb-12 w-full">
+                <p class="font-special text-[10px] sm:text-xs md:text-sm tracking-[0.3em] sm:tracking-[0.5em] text-red-500 uppercase mb-3">Un documental de Foco Alterno</p>
+                <h2 class="title-stamp fluid-hero">THE MOST WANTED</h2>
+                <h3 class="font-bebas text-xl sm:text-3xl md:text-5xl text-red-600 tracking-[0.25em] sm:tracking-[0.35em] mt-3 inline-block border-y border-gray-800 py-2 px-4 sm:px-6">DOCUMENTAL</h3>
             </div>
 
-            <div class="synopsis p-6 md:p-12 mb-20 max-w-4xl relative">
+            <div class="synopsis p-5 pt-8 md:p-12 mb-14 md:mb-20 max-w-4xl relative">
                 <span class="absolute -top-6 left-4 text-7xl md:text-9xl text-red-800/50 font-serif leading-none pointer-events-none">“</span>
-                <div class="font-sans text-gray-300 space-y-4 md:space-y-6 text-base md:text-xl text-justify font-light px-1 md:px-4">
+                <div class="font-sans text-gray-300 space-y-4 md:space-y-6 text-[0.95rem] sm:text-base md:text-xl text-left md:text-justify font-light px-1 md:px-4 hyphens-auto">
                     <p class="first-letter:text-6xl md:first-letter:text-7xl first-letter:font-bebas first-letter:text-red-600 first-letter:mr-3 first-letter:float-left first-letter:leading-none">
                         Este documental narra la historia de una banda de rock originaria de Cartavio que lucha por hacer escuchar su música y lograr el reconocimiento de sus canciones.
                     </p>
@@ -616,7 +677,7 @@
             <div class="w-full">
                 <div class="flex items-center justify-center gap-4 mb-12">
                     <div class="h-px bg-gradient-to-r from-transparent to-red-800 flex-1"></div>
-                    <h4 class="title-stamp text-3xl md:text-5xl">EL EQUIPO</h4>
+                    <h4 class="title-stamp text-3xl md:text-5xl whitespace-nowrap">EL EQUIPO</h4>
                     <div class="h-px bg-gradient-to-l from-transparent to-red-800 flex-1"></div>
                 </div>
 
@@ -624,27 +685,27 @@
                     <div class="credit-card lg:col-span-2">
                         <span class="credit-num">01</span>
                         <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Directora / Editora</span>
-                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Gil Pinedo, Angelina</span>
+                        <span class="font-bebas text-[1.7rem] sm:text-3xl md:text-4xl tracking-wide text-white break-words">Gil Pinedo, Angelina</span>
                     </div>
                     <div class="credit-card lg:col-span-2">
                         <span class="credit-num">02</span>
                         <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Productora / Dir. Fotografía</span>
-                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Vilchez Aguirre, Jade</span>
+                        <span class="font-bebas text-[1.7rem] sm:text-3xl md:text-4xl tracking-wide text-white break-words">Vilchez Aguirre, Jade</span>
                     </div>
                     <div class="credit-card lg:col-span-2">
                         <span class="credit-num">03</span>
                         <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Dir. Arte / Asist. Cámara</span>
-                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Ulloa Ortiz, Kristel</span>
+                        <span class="font-bebas text-[1.7rem] sm:text-3xl md:text-4xl tracking-wide text-white break-words">Ulloa Ortiz, Kristel</span>
                     </div>
                     <div class="credit-card lg:col-span-3">
                         <span class="credit-num">04</span>
                         <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Gaffer / Asist. Producción</span>
-                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Lázaro, Biélica</span>
+                        <span class="font-bebas text-[1.7rem] sm:text-3xl md:text-4xl tracking-wide text-white break-words">Lázaro, Biélica</span>
                     </div>
                     <div class="credit-card lg:col-span-3 md:col-span-2">
                         <span class="credit-num">05</span>
                         <span class="block font-sans text-red-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Dir. Audio / Asist. Producción</span>
-                        <span class="font-bebas text-3xl md:text-4xl tracking-wide text-white">Salavarria, Leandro</span>
+                        <span class="font-bebas text-[1.7rem] sm:text-3xl md:text-4xl tracking-wide text-white break-words">Salavarria, Leandro</span>
                     </div>
                 </div>
             </div>
@@ -668,6 +729,21 @@
         </a>
         <a href="https://vsco.co/foco-alterno?share=MTc5MjgxMzE0Nw%3D%3D" target="_blank" rel="noopener" class="text-gray-400 hover:-translate-y-1 transform transition duration-300 font-bebas text-sm px-1.5 py-0.5 border border-gray-600 rounded flex items-center justify-center hover:border-white" title="VSCO">VSCO</a>
     </div>
+
+
+    <!-- ==========================================
+         FIRMA DEL DESARROLLADOR (todas las páginas)
+         ========================================== -->
+    <footer class="dev-credit" aria-label="Créditos de desarrollo">
+        <span>Desarrollado por <a id="dev-name-link" class="dev-name" href="https://github.com/raydberg" target="_blank" rel="noopener">Raydberg</a></span>
+        <span class="dev-sep" aria-hidden="true"></span>
+        <a href="https://github.com/raydberg" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/raydbergchuquival" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+    </footer>
 
     <!-- ==========================================
          LÓGICA JAVASCRIPT
