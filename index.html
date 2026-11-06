@@ -351,6 +351,52 @@
         .dev-credit .dev-sep { width: 1px; height: 7px; background: rgba(255, 255, 255, 0.25); }
         .dev-credit svg { width: 9px; height: 9px; }
         @media (min-width: 768px) { .dev-credit { font-size: 9px; bottom: max(8px, env(safe-area-inset-bottom)); } }
+
+        /* ---------- FOTO DEL EQUIPO ---------- */
+        .team-photo { position: relative; width: 100%; max-width: 64rem; margin: 0 auto 4.5rem; transform: rotate(-0.8deg); transition: transform 0.5s ease; }
+        .team-photo:hover { transform: rotate(0deg); }
+        .team-photo-frame {
+            position: relative; padding: 10px 10px 0; background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.85), 0 0 60px rgba(139,0,0,0.3), 6px 6px 0 var(--rock-red);
+        }
+        .team-photo-img { position: relative; overflow: hidden; background: #000; }
+        .team-photo-img img {
+            display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            filter: grayscale(0.85) contrast(1.15) brightness(0.9);
+            transition: filter 0.7s ease, transform 0.9s ease;
+        }
+        .team-photo:hover .team-photo-img img { filter: grayscale(0.1) contrast(1.1) brightness(1); transform: scale(1.03); }
+        .team-photo-img::before { /* tinte rojo + viñeta */
+            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(to top, rgba(10,0,0,0.85), transparent 45%), radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55)), rgba(139,0,0,0.22);
+            mix-blend-mode: multiply; transition: opacity 0.7s ease;
+        }
+        .team-photo:hover .team-photo-img::before { opacity: 0.45; }
+        .team-photo-img::after { /* grano */
+            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.5;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        .team-corner { position: absolute; z-index: 3; width: 22px; height: 22px; border: 2px solid var(--rock-red-bright); pointer-events: none; }
+        .team-corner.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+        .team-corner.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+        .team-corner.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+        .team-corner.br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+        .team-photo-tag {
+            position: absolute; z-index: 3; left: 1rem; bottom: 0.9rem; right: 1rem;
+            display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; pointer-events: none;
+        }
+        .team-photo-tag .big { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.14em; font-size: clamp(1.3rem, 4.5vw, 2.6rem); line-height: 1; color: #fff; text-shadow: 3px 3px 0 var(--rock-red), 0 2px 14px rgba(0,0,0,0.9); }
+        .team-photo-tag .small { font-family: 'Special Elite', cursive; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-shadow: 0 1px 6px #000; white-space: nowrap; }
+        .team-photo-strip { height: 26px; display: flex; align-items: center; justify-content: space-between; padding: 0 4px; font-family: 'Special Elite', cursive; font-size: 9px; letter-spacing: 0.3em; color: rgba(255,255,255,0.35); text-transform: uppercase; }
+        @media (max-width: 639px) {
+            .team-photo { margin-bottom: 3rem; transform: none; }
+            .team-photo-frame { padding: 6px 6px 0; box-shadow: 0 20px 50px rgba(0,0,0,0.85), 4px 4px 0 var(--rock-red); }
+            .team-photo-tag .small { display: none; }
+            .team-photo-img img { aspect-ratio: 4 / 3; object-position: 50% 60%; }
+            .team-photo-strip { font-size: 8px; letter-spacing: 0.2em; }
+        }
+        @media (hover: none) { .team-photo:hover { transform: none; } .team-photo-img img { filter: grayscale(0.5) contrast(1.1); } .team-photo-img::before { opacity: 0.7; } }
     </style>
 </head>
 
@@ -365,7 +411,7 @@
     <main id="view-home" class="relative w-full h-screen overflow-hidden fade-in">
 
         <video autoplay loop muted playsinline class="video-bg">
-            <source src="./assets/VIDEO%20PAGINA.mp4" type="video/mp4">
+            <source src="./assets/PORTADA.mp4" type="video/mp4">
         </video>
 
         <div class="absolute left-1/2 -translate-x-1/2 top-[62%] sm:top-[68%] z-20">
@@ -674,10 +720,24 @@
                 </div>
             </div>
 
+            <figure class="team-photo tape">
+                <div class="team-photo-frame">
+                    <div class="team-photo-img">
+                        <img src="./assets/equipo.jpeg" alt="Equipo de Foco Alterno sentado en las escaleras de la plaza" loading="lazy" onerror="this.closest('.team-photo').style.display='none'">
+                        <span class="team-corner tl"></span><span class="team-corner tr"></span><span class="team-corner bl"></span><span class="team-corner br"></span>
+                        <figcaption class="team-photo-tag">
+                            <span class="big">FOCO ALTERNO</span>
+                            <span class="small">The Most Wanted · Documental</span>
+                        </figcaption>
+                    </div>
+                    <div class="team-photo-strip" aria-hidden="true"><span>▶ 01</span><span>Cartavio · Perú</span><span>◼ REC</span></div>
+                </div>
+            </figure>
+
             <div class="w-full">
                 <div class="flex items-center justify-center gap-4 mb-12">
                     <div class="h-px bg-gradient-to-r from-transparent to-red-800 flex-1"></div>
-                    <h4 class="title-stamp text-3xl md:text-5xl whitespace-nowrap">EL EQUIPO</h4>
+                    <h4 class="title-stamp text-2xl sm:text-3xl md:text-5xl text-center leading-tight">EL EQUIPO <span class="text-red-600" style="text-shadow: 3px 3px 0 #000;">FOCO ALTERNO</span></h4>
                     <div class="h-px bg-gradient-to-l from-transparent to-red-800 flex-1"></div>
                 </div>
 
